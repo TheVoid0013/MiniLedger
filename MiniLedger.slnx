@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MiniLedger.Api/MiniLedger.Api.csproj" />
+    <Project Path="src/MiniLedger.Application/MiniLedger.Application.csproj" />
+    <Project Path="src/MiniLedger.Domain/MiniLedger.Domain.csproj" />
+    <Project Path="src/MiniLedger.Infrastructure/MiniLedger.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MiniLedger.Domain.Tests/MiniLedger.Domain.Tests.csproj" />
+  </Folder>
+</Solution>
