@@ -8,6 +8,7 @@ public class Account
     public AccountNumber AccountNumber { get; private set; } = default!;
     public string Owner { get; private set; } = default!;
     public Money Balance { get; private set; } = default!;
+    public long Version { get; private set; }   // concurrency token
     public IReadOnlyCollection<Transaction> Transactions => _transactions.AsReadOnly();
 
     private Account() { } // EF
@@ -22,7 +23,8 @@ public class Account
             Id = Guid.NewGuid(),
             AccountNumber = AccountNumber.Generate(),
             Owner = owner,
-            Balance = Money.Zero(currency)
+            Balance = Money.Zero(currency),
+            Version = 0
         };
     }
 
@@ -31,6 +33,7 @@ public class Account
         EnsurePositive(money);
         Balance = Balance.Add(money);
         _transactions.Add(Transaction.Create(Id, TransactionType.Deposit, money, Balance));
+        Version++;
     }
 
     public void Withdraw(Money money)
@@ -39,6 +42,7 @@ public class Account
         if (money.IsGreaterThan(Balance)) throw new InsufficientFundsException();
         Balance = Balance.Subtract(money);
         _transactions.Add(Transaction.Create(Id, TransactionType.Withdrawal, money, Balance));
+        Version++;
     }
 
     // used only by TransferService so the ledger shows "transfer", not deposit/withdraw
@@ -48,6 +52,7 @@ public class Account
         if (money.IsGreaterThan(Balance)) throw new InsufficientFundsException();
         Balance = Balance.Subtract(money);
         _transactions.Add(Transaction.Create(Id, TransactionType.TransferOut, money, Balance, counterpartyId));
+        Version++;
     }
 
     internal void CreditFromTransfer(Money money, Guid counterpartyId)
@@ -55,6 +60,7 @@ public class Account
         EnsurePositive(money);
         Balance = Balance.Add(money);
         _transactions.Add(Transaction.Create(Id, TransactionType.TransferIn, money, Balance, counterpartyId));
+        Version++;
     }
 
     private static void EnsurePositive(Money m)

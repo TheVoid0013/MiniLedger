@@ -1,0 +1,10 @@
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;
+global using MiniLedger.Domain.Entities;
+global using MiniLedger.Application.Abstractions;
+global using MiniLedger.Domain.ValueObjects;
+global using MiniLedger.Domain.Entities;
+global using MiniLedger.Domain.Exceptions;
+global using MiniLedger.Domain.Services;
+global using MiniLedger.Application.Behaviors;
+global using MiniLedger.Application.Presentation;
