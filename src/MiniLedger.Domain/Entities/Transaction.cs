@@ -20,8 +20,8 @@ public class Transaction
         Id = Guid.NewGuid(),
         AccountId = accountId,
         Type = type,
-        Amount = amount,
-        BalanceAfter = balanceAfter,
+        Amount = amount with { },              // fresh instance per row
+        BalanceAfter = balanceAfter with { },  // fresh instance per row
         CounterpartyAccountId = counterparty,
         CreatedAt = DateTime.UtcNow
     };

@@ -39,11 +39,13 @@ using (var scope = app.Services.CreateScope())
 
 app.UseExceptionHandler();
 
-if (app.Environment.IsDevelopment())
+// OpenAPI + Swagger UI (available in container too, fine for a learning project)
+app.MapOpenApi();
+app.UseSwaggerUI(options =>
 {
-    app.MapOpenApi();
-    app.UseHttpsRedirection(); // dev only, the container will serve plain HTTP
-}
+    options.SwaggerEndpoint("/openapi/v1.json", "MiniLedger API v1");
+});
+
 
 app.UseAuthorization();
 app.MapControllers();
