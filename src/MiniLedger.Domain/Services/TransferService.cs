@@ -7,6 +7,9 @@ public class TransferService
         if (source.Id == destination.Id)
             throw new SameAccountTransferException();
 
+        if (source.Balance.Currency != destination.Balance.Currency)
+            throw new CurrencyMismatchException(source.Balance.Currency, destination.Balance.Currency);
+
         source.DebitForTransfer(amount, destination.Id);
         destination.CreditFromTransfer(amount, source.Id);
     }
