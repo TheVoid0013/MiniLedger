@@ -6,6 +6,7 @@
     <Project Path="src/MiniLedger.Infrastructure/MiniLedger.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/MiniLedger.Api.Tests/MiniLedger.Api.Tests.csproj" />
     <Project Path="tests/MiniLedger.Domain.Tests/MiniLedger.Domain.Tests.csproj" />
   </Folder>
 </Solution>
