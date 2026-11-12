@@ -1,6 +1,3 @@
-using MiniLedger.Domain.Entities;
-using MiniLedger.Domain.ValueObjects;
-
 namespace MiniLedger.Domain.Tests.Entities;
 
 public class TransactionTests

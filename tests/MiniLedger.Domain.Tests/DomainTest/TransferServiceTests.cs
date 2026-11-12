@@ -1,8 +1,3 @@
-using MiniLedger.Domain.Entities;
-using MiniLedger.Domain.Exceptions;
-using MiniLedger.Domain.Services;
-using MiniLedger.Domain.ValueObjects;
-
 namespace MiniLedger.Domain.Tests.Services;
 
 public class TransferServiceTests

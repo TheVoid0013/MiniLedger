@@ -1,7 +1,3 @@
-using MiniLedger.Domain.Entities;
-using MiniLedger.Domain.Exceptions;
-using MiniLedger.Domain.ValueObjects;
-
 namespace MiniLedger.Domain.Tests.Entities;
 
 public class AccountTests
