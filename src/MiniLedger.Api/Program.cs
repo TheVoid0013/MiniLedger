@@ -31,9 +31,11 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-// Create/upgrade the DB on startup (fine for a learning project)
-using (var scope = app.Services.CreateScope())
+// Create/upgrade the DB on startup (fine for a learning project).
+// Skipped in the "Testing" environment: the test factory creates its own schema.
+if (!app.Environment.IsEnvironment("Testing"))
 {
+    using var scope = app.Services.CreateScope();
     scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate();
 }
 
@@ -51,3 +53,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// Makes Program visible to WebApplicationFactory<Program> in the test project
+public partial class Program;
