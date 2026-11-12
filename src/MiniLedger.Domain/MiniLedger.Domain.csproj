@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="MiniLedger.Domain.Tests" />
+  </ItemGroup>
+
 </Project>
